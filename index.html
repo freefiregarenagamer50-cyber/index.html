@@ -4,11 +4,107 @@
         <span style="color: #28a745;">🌎</span> MyTravel<span style="color: #333;">Agency</span>
     </div>
     
-    <ul style="display: flex; list-style: none; gap: 20px; margin: 0;">
-        <li><a href="#" style="text-decoration: none; color: #333;">Home</a></li>
-        <li><a href="#" style="text-decoration: none; color: #333;">Packages</a></li>
-        <li><button onclick="logout()" style="padding: 5px 15px; cursor: pointer;">Logout</button></li>
-    </ul>
+    <style>
+  .auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #f8f9fa; /* Halki grey background */
+  }
+  .auth-container {
+    width: 100%;
+    max-width: 380px;
+    background: #ffffff;
+    padding: 35px 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Premium Shadow */
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+  .auth-container h2 {
+    color: #2d3436;
+    font-size: 24px;
+    margin-bottom: 25px;
+    font-weight: bold;
+  }
+  .auth-input {
+    width: 100%;
+    padding: 14px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #dfe6e9;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 15px;
+    transition: all 0.3s;
+  }
+  .auth-input:focus {
+    border-color: #0984e3; /* Focus karne par blue line */
+    outline: none;
+    box-shadow: 0 0 8px rgba(9, 132, 227, 0.2);
+  }
+  .auth-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #0984e3, #74b9ff); /* Stylish Blue Gradient */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3);
+  }
+  .auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(9, 132, 227, 0.4);
+  }
+  .toggle-link {
+    color: #0984e3;
+    cursor: pointer;
+    margin-top: 20px;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .toggle-link:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<div class="auth-wrapper" id="auth-section">
+  <div class="auth-container">
+    <h2 id="auth-title">Welcome Back!</h2>
+    <input type="email" id="user-email" class="auth-input" placeholder="Apna Email ID daalein">
+    <input type="password" id="user-pass" class="auth-input" placeholder="Apna Password daalein">
+    <button class="auth-btn" onclick="handleAuth()" id="auth-submit">Login Karein</button>
+    <span class="toggle-link" onclick="toggleAuthMode()" id="auth-toggle">Naya account banana hai? Yahan click karein</span>
+  </div>
+</div>
+
+<script>
+  let isLoginMode = true;
+
+  function toggleAuthMode() {
+    isLoginMode = !isLoginMode;
+    
+    // Text change karne ka animation
+    const title = document.getElementById('auth-title');
+    const submitBtn = document.getElementById('auth-submit');
+    const toggleLink = document.getElementById('auth-toggle');
+
+    if (isLoginMode) {
+      title.innerText = "Welcome Back!";
+      submitBtn.innerText = "Login Karein";
+      toggleLink.innerText = "Naya account banana hai? Yahan click karein";
+    } else {
+      title.innerText = "Naya Account Banayein";
+      submitBtn.innerText = "Sign Up Karein";
+      toggleLink.innerText = "Pehle se account hai? Login karein";
+    }
+  }
+      </script>
 </nav>
 <html lang="hi">
 <head>
