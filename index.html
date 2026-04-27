@@ -1,277 +1,207 @@
 <!DOCTYPE html>
-<nav style="display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: white; shadow: 0 2px 5px rgba(0,0,0,0.1);">
-    <div class="logo" style="font-size: 24px; font-weight: bold; color: #007bff;">
-        <span style="color: #28a745;">🌎</span> MyTravel<span style="color: #333;">Agency</span>
-    </div>
-    <style>
-  .auth-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 20px;
-    background-color: #f8f9fa; /* Halki grey background */
-  }
-  .auth-container {
-    width: 100%;
-    max-width: 380px;
-    background: #ffffff;
-    padding: 35px 25px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Premium Shadow */
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-  }
-  .auth-container h2 {
-    color: #2d3436;
-    font-size: 24px;
-    margin-bottom: 25px;
-    font-weight: bold;
-  }
-  .auth-input {
-    width: 100%;
-    padding: 14px 15px;
-    margin-bottom: 15px;
-    border: 1px solid #dfe6e9;
-    border-radius: 10px;
-    box-sizing: border-box;
-    font-size: 15px;
-    transition: all 0.3s;
-  }
-  .auth-input:focus {
-    border-color: #0984e3; /* Focus karne par blue line */
-    outline: none;
-    box-shadow: 0 0 8px rgba(9, 132, 227, 0.2);
-  }
-  .auth-btn {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, #0984e3, #74b9ff); /* Stylish Blue Gradient */
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3);
-  }
-  .auth-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(9, 132, 227, 0.4);
-  }
-  .toggle-link {
-    color: #0984e3;
-    cursor: pointer;
-    margin-top: 20px;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  .toggle-link:hover {
-    text-decoration: underline;
-  }
-</style>
-
-<div class="auth-wrapper" id="auth-section">
-  <div class="auth-container">
-    <h2 id="auth-title">Welcome Back!</h2>
-    <input type="email" id="user-email" class="auth-input" placeholder="Gmail or phone ">
-    <input type="password" id="user-pass" class="auth-input" placeholder="password ">
-    <button class="auth-btn" onclick="handleAuth()" id="auth-submit">Login</button>
-    <span class="toggle-link" onclick="toggleAuthMode()" id="auth-toggle">create a new account ? click here</span>
-  </div>
-</div>
-
-<script>
-  let isLoginMode = true;
-
-  function toggleAuthMode() {
-    isLoginMode = !isLoginMode;
-    
-    // change your text
-    const title = document.getElementById('auth-title');
-    const submitBtn = document.getElementById('auth-submit');
-    const toggleLink = document.getElementById('auth-toggle');
-
-    if (isLoginMode) {
-      title.innerText = "Welcome Back!";
-      submitBtn.innerText = "Login here";
-      toggleLink.innerText = "create a new account ? click here";
-    } else {
-      title.innerText = "create a new account ";
-      submitBtn.innerText = "Sign Up";
-      toggleLink.innerText = "i have already a account? Login ";
-    }
-  }
-      </script>
-</nav>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta name="google-site-verification" content="ncbGmKeHSToRHQfwrUbeJhYNicNyCggyQxDQRbqc2v0" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Hub | Login Required</title>
+    <title>MyTravel Agency & Official Services</title>
     <style>
-        /* CSS Section */
-        :root { --primary: #007bff; --secondary: #28a745; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f0f2f5; text-align: center; }
-        
-        /* Auth Form Styles */
-        .auth-container {
-            max-width: 400px; margin: 50px auto; background: white;
-            padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; }
-        button { width: 95%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; }
-        .toggle-link { color: var(--primary); cursor: pointer; margin-top: 15px; display: block; }
+        /* ================= GENERAL STYLES ================= */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; color: #2d3436; }
+        html { scroll-behavior: smooth; }
 
-        /* Main Website (Hidden by default) */
-        #main-site { display: none; padding: 20px; }
-        .tour-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .card { background: white; padding: 20px; border-radius: 10px; width: 280px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        /* ================= LOGIN & REGISTER PAGE ================= */
+        #auth-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .brand-logo { text-align: center; margin-bottom: 20px; }
+        .brand-logo h1 { font-size: 28px; color: #2d3436; }
+        .brand-logo h1 span { color: #0984e3; }
+        .auth-container {
+            width: 100%; max-width: 380px; background: #fff; padding: 35px 25px;
+            border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center;
+        }
+        .auth-container h2 { margin-bottom: 20px; font-size: 24px; }
+        .auth-input {
+            width: 100%; padding: 12px 15px; margin-bottom: 15px;
+            border: 1px solid #dfe6e9; border-radius: 8px; font-size: 15px; outline: none;
+        }
+        .auth-input:focus { border-color: #0984e3; }
+        .auth-btn {
+            width: 100%; padding: 14px; background: #0984e3; color: white;
+            border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer;
+        }
+        .toggle-link { color: #0984e3; cursor: pointer; display: block; margin-top: 15px; font-size: 14px; }
+
+        /* ================= MAIN WEBSITE ================= */
+        #main-website { display: none; } /* Shuru mein chhupa rahega */
+
+        /* Navbar */
+        .navbar {
+            background-color: #2d3436; padding: 15px; display: flex;
+            justify-content: center; gap: 15px; flex-wrap: wrap; position: sticky; top: 0; z-index: 100;
+        }
+        .navbar a { color: white; text-decoration: none; font-weight: bold; padding: 8px 12px; border-radius: 5px; font-size: 14px; }
+        .navbar a:hover { background-color: #0984e3; }
+
+        /* Header */
+        .header { background: linear-gradient(135deg, #0984e3, #74b9ff); color: white; text-align: center; padding: 40px 20px; }
+        .header h1 { font-size: 28px; margin-bottom: 10px; }
+
+        /* Sections */
+        .section { padding: 40px 20px; text-align: center; max-width: 1000px; margin: auto; }
+        .section-title { font-size: 24px; margin-bottom: 30px; color: #2d3436; border-bottom: 3px solid #0984e3; display: inline-block; padding-bottom: 5px;}
         
-        .hidden { display: none; }
+        /* Cards Grid */
+        .grid-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .card {
+            background: white; border-radius: 12px; padding: 20px; width: 100%; max-width: 300px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; border-top: 4px solid #0984e3;
+        }
+        .card h3 { font-size: 20px; margin-bottom: 10px; }
+        .price { color: #e17055; font-size: 22px; font-weight: bold; margin: 10px 0; }
+        .whatsapp-btn {
+            display: inline-block; background-color: #25D366; color: white; padding: 10px 20px;
+            text-decoration: none; border-radius: 6px; font-weight: bold; margin-top: 15px; width: 100%;
+        }
+
+        /* Footer */
+        .footer { background-color: #2d3436; color: white; text-align: center; padding: 20px; margin-top: 40px; }
     </style>
 </head>
 <body>
 
-    <div id="auth-box" class="auth-container">
-        <h2 id="form-title">create a new account </h2>
-        <div id="signup-fields">
-            <input type="text" id="user-name" placeholder="full name">
+    <div id="auth-section">
+        <div class="brand-logo">
+            <h1><span>MyTravel</span>Agency</h1>
+            <p>Welcome to our Official Portal</p>
         </div>
-        <input type="email" id="user-email" placeholder="Email Address">
-        <input type="password" id="user-pass" placeholder="Password">
-        
-        <button onclick="handleAuth()" id="auth-btn">register</button>
-        
-        <span class="toggle-link" onclick="toggleForm()" id="toggle-text">i have an account </span>
+        <div class="auth-container">
+            <h2 id="auth-title">Welcome Back!</h2>
+            <input type="text" id="user-name" class="auth-input" placeholder="Full Name" style="display:none;">
+            <input type="email" id="user-email" class="auth-input" placeholder="Email Address">
+            <input type="password" id="user-pass" class="auth-input" placeholder="Password">
+            <button class="auth-btn" onclick="loginSuccess()" id="auth-submit">Login</button>
+            <span class="toggle-link" onclick="toggleAuthMode()" id="auth-toggle">Naya account banana hai? Click here</span>
+        </div>
     </div>
 
-    <div id="main-site">
-        <header style="background: var(--primary); color: white; padding: 40px; border-radius: 0 0 20px 20px;">
-            <h1>Welcome, <span id="display-name">User</span>!</h1>
-            <p>Aapke pasandida Tour Packages niche hain.</p>
-            <button onclick="logout()" style="width: 100px; background: #dc3545;">Logout</button>
-        </header>
+    <div id="main-website">
+        
+        <div class="navbar">
+            <a href="#home">Home</a>
+            <a href="#tours">Tour Packages</a>
+            <a href="#supply">Coin Supply</a>
+            <a href="#contact">Contact Us</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
 
-        <section class="tour-grid">
-            <div class="card">
-                <h3>Shimla Weekend Tour</h3>
-                <p>2 Days - ₹4,500</p>
-                <button style="background: var(--secondary);">Book Now</button>
+        <div id="home" class="header">
+            <h1>Aapka Safar, Hamari Zimmedari</h1>
+            <p>Best Travel Packages & Official Digital Services</p>
+        </div>
+
+        <div id="tours" class="section">
+            <h2 class="section-title">Hamare Best Tour Packages</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Kedarnath Yatra</h3>
+                    <p>4 Din / 3 Raat</p>
+                    <p>Hotel, Khana aur Transport shamil hai.</p>
+                    <p class="price">₹9,999</p>
+                    <a href="https://wa.me/910000000000?text=Mujhe Kedarnath Yatra book karni hai" class="whatsapp-btn">Book via WhatsApp</a>
+                </div>
+                <div class="card">
+                    <h3>Manali Trip</h3>
+                    <p>3 Din / 2 Raat</p>
+                    <p>Best weekend getaway with sightseeing.</p>
+                    <p class="price">₹5,499</p>
+                    <a href="https://wa.me/910000000000?text=Mujhe Manali Trip book karni hai" class="whatsapp-btn">Book via WhatsApp</a>
+                </div>
             </div>
-            <div class="card">
-                <h3>Goa Long Tour</h3>
-                <p>7 Days - ₹15,999</p>
-                <button style="background: var(--secondary);">Book Now</button>
+        </div>
+
+        <div id="supply" class="section" style="background-color: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h2 class="section-title">Official Supply & Services</h2>
+            <div class="grid-container">
+                <div class="card" style="border-top-color: #e17055;">
+                    <h3>Taka Live - Coins Supply</h3>
+                    <p>Fast, Safe aur Trusted Transfer</p>
+                    <p class="price">10,000 Coins = ₹110</p>
+                    <a href="https://wa.me/910000000000?text=Mujhe Taka Live Coins chahiye" class="whatsapp-btn">Buy Coins Now</a>
+                </div>
+                <div class="card" style="border-top-color: #e17055;">
+                    <h3>ACM Mentor Support</h3>
+                    <p>Guidance aur Support ke liye sampark karein.</p>
+                    <p style="margin-top: 10px; font-weight: bold;">Official Seller ID: <span style="color:#0984e3;">577548347</span></p>
+                </div>
             </div>
-        </section>
+        </div>
+
+        <div id="contact" class="section">
+            <h2 class="section-title">Contact Us</h2>
+            <p>Kisi bhi jaankari ya booking ke liye humse direct juden.</p>
+            <br>
+            <a href="https://wa.me/910000000000" class="whatsapp-btn" style="max-width: 300px;">Direct WhatsApp Message</a>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 MyTravel Agency & Official Supply. All Rights Reserved.</p>
+        </div>
+
     </div>
-<script>
-         location.reload(); // Simple reload to reset state
+
+    <script>
+        // Login aur Register box change karne ka code
+        let isLoginMode = true;
+        function toggleAuthMode() {
+            isLoginMode = !isLoginMode;
+            const title = document.getElementById('auth-title');
+            const submitBtn = document.getElementById('auth-submit');
+            const toggleLink = document.getElementById('auth-toggle');
+            const nameBox = document.getElementById('user-name');
+
+            if (isLoginMode) {
+                title.innerText = "Welcome Back!";
+                submitBtn.innerText = "Login";
+                toggleLink.innerText = "Naya account banana hai? Click here";
+                nameBox.style.display = "none";
+            } else {
+                title.innerText = "Create New Account";
+                submitBtn.innerText = "Register";
+                toggleLink.innerText = "Already have an account? Login";
+                nameBox.style.display = "block";
+            }
+        }
+
+        // Login hone ke baad website dikhane ka code
+        function loginSuccess() {
+            const email = document.getElementById('user-email').value;
+            const pass = document.getElementById('user-pass').value;
+
+            if(email === "" || pass === "") {
+                alert("Kripya apna Email aur Password daalein!");
+                return;
+            }
+            
+            // Login box chupao, main website dikhao
+            document.getElementById('auth-section').style.display = 'none';
+            document.getElementById('main-website').style.display = 'block';
+            window.scrollTo(0, 0); // Upar scroll karein
+        }
+
+        // Logout karne ka code
+        function logout() {
+            document.getElementById('user-email').value = "";
+            document.getElementById('user-pass').value = "";
+            document.getElementById('auth-section').style.display = 'flex';
+            document.getElementById('main-website').style.display = 'none';
         }
     </script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Tour & Travels</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <header>
-        <h1>travel with me</h1>
-        <p>best deal of travel and weekends !</p>
-    </header>
-
-    <section class="container">
-        <h2>tour package </h2>
-        
-        <div class="tour-grid">
-            <div class="card">
-                <h3>Weekend Getaway</h3>
-                <p>2 Din / 1 Raat</p>
-                <p>Starting from: <b>₹5,999</b></p>
-                <a href="https://wa.me/+91 8539987075?text=Mujhe Weekend Tour book karna hai" class="btn">book now</a>
-            </div>
-
-            <div class="card">
-                <h3>Long Vacation</h3>
-                <p>5 Din / 4 Raat</p>
-                <p>Starting from: <b>₹12,999/night</b></p>
-                <a href="https://wa.me/+91 8539987075?text=Mujhe Long Tour book karna hai" class="btn">book now </a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>any question? contact us on WhatsApp !</p>
-        <a href="https://wa.me/+91 8539987075" class="whatsapp-float">WhatsApp Chat</a>
-    </footer>
-<div></div>
-</body>
-</html>                        
-<section class="tour-grid" style="display: flex; justify-content: center; gap: 25px; padding: 40px; flex-wrap: wrap;">
-    
-    <div class="card" style="width: 300px; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-        <img src="https://images.unsplash.com/photo-1506461883276-594a12b11cf3?auto=format&fit=crop&w=400&q=80" alt="Hills" style="width: 100%; height: 200px; object-fit: cover;">
-        <div style="padding: 20px; text-align: left;">
-            <h3 style="margin: 0;">Manali Weekend Trip</h3>
-            <p style="color: #666; font-size: 14px;">2 Din / 1 Raat - Luxury Stay</p>
-            <p style="color: #007bff; font-weight: bold; font-size: 18px;">₹4,999</p>
-            <button style="width: 100%; background: #28a745; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Book via WhatsApp</button>
-        </div>
-    </div>
-
-    <div class="card" style="width: 300px; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80" alt="Beach" style="width: 100%; height: 200px; object-fit: cover;">
-        <div style="padding: 20px; text-align: left;">
-            <h3 style="margin: 0;">Goa Beach Vacation</h3>
-            <p style="color: #666; font-size: 14px;">5 Din / 4 Raat - Flight Incl.</p>
-            <p style="color: #007bff; font-weight: bold; font-size: 18px;">₹12,499</p>
-            <button style="width: 100%; background: #28a745; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Book via WhatsApp</button>
-        </div>
-    </div>
-
-</section>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <section class="pricing-section" style="padding: 50px 20px; background: #f9f9f9;">
-    <h2 style="margin-bottom: 30px;">select your plan</h2>
-    
-    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-        
-        <div class="pricing-card" style="background: white; border: 1px solid #ddd; border-radius: 15px; width: 300px; padding: 20px; transition: 0.3s;">
-            <h3 style="color: #666;">tour budget</h3>
-            <div style="font-size: 32px; font-weight: bold; margin: 20px 0;">₹4,499 <span style="font-size: 14px; color: #999;">/person</span></div>
-            <ul style="list-style: none; padding: 0; text-align: left; line-height: 2;">
-                <li>✅ Standard Hotel (3 Star)</li>
-                <li>✅ Group Sightseeing</li>
-                <li>✅ Breakfast Included</li>
-                <li>❌ AC Transport</li>
-                <li>❌ Tour Guide</li>
-            </ul>
-            <a href="https://wa.me/91YOURNUMBER?text=Mujhe Budget Plan book karna hai" style="display: block; background: #007bff; color: white; padding: 12px; border-radius: 8px; text-decoration: none; margin-top: 20px;">select this</a>
-        </div>
-
-        <div class="pricing-card" style="background: white; border: 3px solid #28a745; border-radius: 15px; width: 320px; padding: 30px; position: relative; transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-            <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #28a745; color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold;">MOST POPULAR</div>
-            <h3 style="color: #333;">Luxury Experience</h3>
-            <div style="font-size: 32px; font-weight: bold; margin: 20px 0;">₹8,999 <span style="font-size: 14px; color: #999;">/person</span></div>
-            <ul style="list-style: none; padding: 0; text-align: left; line-height: 2;">
-                <li>✅ 5 Star Hotel Stay</li>
-                <li>✅ Private AC Car</li>
-                <li>✅ All Meals (B/L/D)</li>
-                <li>✅ Personal Tour Guide</li>
-                <li>✅ Airport Pickup/Drop</li>
-            </ul>
-            <a href="https://wa.me/91YOURNUMBER?text=I'm booking luxury plan" style="display: block; background: #28a745; color: white; padding: 12px; border-radius: 8px; text-decoration: none; margin-top: 20px; font-weight: bold;">select this</a>
-        </div>
-
-    </div>
-  </section>
