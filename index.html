@@ -3,342 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyTravel Agency - Premium Tours</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>MyTravel Agency - Official Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* ================= COLOR & THEME SETTINGS ================= */
-        :root {
-            --primary: #4f46e5;    /* Vibrant Indigo */
-            --primary-glow: rgba(79, 70, 229, 0.4);
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.9);
-            --shadow: 0 10px 30px rgba(0,0,0,0.08);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        :root { --primary: #0984e3; --dark: #2d3436; --light: #f1f2f6; --success: #25D366; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--light); color: var(--dark); overflow-x: hidden; scroll-behavior: smooth; }
+        body { background: var(--light); scroll-behavior: smooth; }
 
-        /* ================= ANIMATIONS ================= */
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 var(--primary-glow); } 70% { box-shadow: 0 0 0 15px rgba(0,0,0,0); } 100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); } }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        /* Login Screen */
+        #auth-section { height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1350&q=80') center/cover; }
+        .auth-card { background: white; padding: 40px; border-radius: 20px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+        .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
+        .auth-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
-        /* ================= PRELOADER (LOADING SCREEN) ================= */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--white);
-            display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10000; transition: 0.5s;
-        }
-        .loader-circle {
-            width: 60px; height: 60px; border: 5px solid #e2e8f0; border-top-color: var(--primary);
-            border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px;
-        }
-        #preloader h2 { font-family: 'Montserrat', sans-serif; color: var(--dark); letter-spacing: 2px; animation: float 2s ease-in-out infinite;}
+        /* Main Site */
+        #main-site { display: none; }
+        .navbar { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .logo { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 800; text-decoration: none; color: var(--dark); }
+        .logo span { color: var(--primary); }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; margin-left: 20px; }
 
-        /* ================= TOAST NOTIFICATION ================= */
-        #toast {
-            position: fixed; top: 20px; right: -350px; background: #10b981; color: white;
-            padding: 15px 25px; border-radius: 12px; font-weight: 500; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
-            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 9999; display: flex; align-items: center; gap: 12px;
-        }
-
-        /* ================= 1. AUTH SCREEN (GLASSMORPHISM) ================= */
-        #auth-section {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, #c7d2fe 0%, #fecaca 100%); padding: 20px;
-        }
-        .auth-card {
-            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.5);
-            width: 100%; max-width: 420px; padding: 40px 30px; border-radius: 24px; box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-            text-align: center; animation: fadeInUp 0.8s ease;
-        }
-        .auth-logo { width: 80px; height: 80px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; margin: 0 auto 20px; box-shadow: 0 10px 25px var(--primary-glow); animation: float 3s ease-in-out infinite; }
-        .auth-card h2 { font-size: 28px; font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--dark); }
-        .auth-card p { color: #64748b; margin-bottom: 30px; }
+        /* Sections */
+        .section { padding: 60px 5%; text-align: center; }
+        .section-title { font-size: 32px; font-weight: 800; margin-bottom: 40px; font-family: 'Montserrat'; }
         
-        .input-group { position: relative; margin-bottom: 20px; }
-        .input-group i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 18px; }
-        .auth-input {
-            width: 100%; padding: 16px 16px 16px 50px; border: 2px solid transparent; border-radius: 12px; background: #f1f5f9;
-            font-size: 15px; outline: none; transition: var(--transition);
-        }
-        .auth-input:focus { border-color: var(--primary); background: var(--white); box-shadow: 0 0 0 5px var(--primary-glow); }
+        /* Grid Cards */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 20px; text-align: left; }
+        .price { font-size: 24px; font-weight: 800; color: var(--primary); margin: 10px 0; }
+        .wa-btn { display: block; text-align: center; background: var(--success); color: white; padding: 12px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 10px; }
+
+        /* Payment & Location Info */
+        .info-container { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; margin-top: 20px; }
+        .info-box { background: white; padding: 30px; border-radius: 15px; flex: 1; min-width: 300px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .map-frame { width: 100%; height: 250px; border-radius: 10px; border: 0; margin-top: 10px; }
         
-        .auth-btn {
-            width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px;
-            font-size: 16px; font-weight: 600; cursor: pointer; transition: var(--transition); display: flex; justify-content: center; align-items: center; gap: 10px;
-        }
-        .auth-btn:hover { background: #4338ca; transform: translateY(-3px); box-shadow: 0 15px 30px var(--primary-glow); }
-        .toggle-text { margin-top: 25px; color: #64748b; font-size: 14px; }
-        .toggle-text span { color: var(--primary); font-weight: 600; cursor: pointer; }
-
-        /* ================= 2. MAIN WEBSITE ================= */
-        #main-website { display: none; opacity: 0; }
-
-        /* Navbar */
-        .navbar {
-            position: fixed; top: 0; width: 100%; background: var(--glass); backdrop-filter: blur(15px);
-            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.05); z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.3);
-        }
-        .nav-brand { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 10px; }
-        .nav-brand i { color: var(--primary); font-size: 26px; }
-        .nav-links { display: flex; gap: 20px; align-items: center; }
-        .nav-links a { font-weight: 600; color: #475569; transition: var(--transition); font-size: 15px; text-decoration: none; }
-        .nav-links a:hover { color: var(--primary); }
-        .btn-logout { background: #fee2e2; color: #ef4444; padding: 8px 18px; border-radius: 20px; font-weight: 600; cursor: pointer; border: none; transition: var(--transition); }
-        .btn-logout:hover { background: #ef4444; color: white; transform: scale(1.05); }
-
-        /* Hero Header */
-        .hero {
-            height: 70vh; background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover fixed;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; padding: 0 20px; margin-top: 60px;
-        }
-        .hero h1 { font-family: 'Montserrat', sans-serif; font-size: 50px; font-weight: 800; margin-bottom: 15px; animation: fadeInUp 1s ease; }
-        .hero p { font-size: 18px; max-width: 600px; opacity: 0.9; margin-bottom: 30px; animation: fadeInUp 1.2s ease; }
-
-        /* Sections General */
-        .section-padding { padding: 80px 5%; max-width: 1200px; margin: auto; }
-        .section-header { text-align: center; margin-bottom: 50px; animation: fadeInUp 1s ease; }
-        .section-title { font-family: 'Montserrat', sans-serif; font-size: 35px; font-weight: 800; color: var(--dark); }
-        .section-subtitle { color: var(--primary); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; font-size: 14px; }
-
-        /* Grid & Cards */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
-        .card {
-            background: var(--white); border-radius: 24px; overflow: hidden; box-shadow: var(--shadow);
-            transition: var(--transition); position: relative; border: 1px solid #f1f5f9;
-        }
-        .card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
-        .card-img-wrapper { position: relative; height: 240px; overflow: hidden; }
-        .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .card:hover .card-img { transform: scale(1.1); }
-        .badge { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.9); padding: 8px 15px; border-radius: 20px; font-weight: 700; color: var(--primary); backdrop-filter: blur(5px); }
-        
-        .card-body { padding: 30px; }
-        .card-body h3 { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 15px; }
-        .card-features { list-style: none; margin-bottom: 20px; color: #64748b; }
-        .card-features li { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .card-features i { color: #10b981; }
-        
-        .price-box { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid #e2e8f0; }
-        .price { font-size: 28px; font-weight: 800; color: var(--dark); }
-        
-        /* Animated WhatsApp Button */
-        .btn-wa {
-            background: #25D366; color: white; padding: 12px 25px; border-radius: 12px; font-weight: 600; text-decoration: none;
-            display: inline-flex; align-items: center; gap: 8px; transition: var(--transition); animation: pulseGlow 2s infinite;
-        }
-        .btn-wa:hover { background: #1ebc59; transform: scale(1.05); animation: none; }
-
-        /* Footer */
-        footer { background: #020617; padding: 40px 5%; text-align: center; color: #64748b; margin-top: 40px; }
-        .social-links { margin-bottom: 20px; }
-        .social-links a { color: white; font-size: 24px; margin: 0 15px; transition: var(--transition); display: inline-block;}
-        .social-links a:hover { color: var(--primary); transform: translateY(-5px); }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; } 
-            .hero h1 { font-size: 35px; }
-            .section-padding { padding: 50px 5%; }
-        }
+        footer { background: var(--dark); color: white; padding: 30px; text-align: center; }
     </style>
 </head>
-<body onload="hidePreloader()">
-
-    <div id="preloader">
-        <div class="loader-circle"></div>
-        <h2>LOADING...</h2>
-    </div>
-
-    <div id="toast"><i class="fas fa-check-circle"></i> <span id="toast-msg">Success!</span></div>
+<body>
 
     <div id="auth-section">
         <div class="auth-card">
-            <div class="auth-logo"><i class="fas fa-plane-departure"></i></div>
-            <h2 id="auth-title">Welcome Back</h2>
-            <p id="auth-subtitle">Login to access premium travel deals</p>
-
-            <div class="input-group" id="name-box" style="display: none;">
-                <i class="far fa-user"></i>
-                <input type="text" id="user-name" class="auth-input" placeholder="Enter Full Name">
-            </div>
-            <div class="input-group">
-                <i class="far fa-envelope"></i>
-                <input type="email" id="user-email" class="auth-input" placeholder="Enter Email Address">
-            </div>
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" id="user-pass" class="auth-input" placeholder="Enter Password">
-            </div>
-
-            <button class="auth-btn" onclick="processAuth()" id="auth-submit">
-                Login Securely <i class="fas fa-shield-alt"></i>
-            </button>
-
-            <div class="toggle-text">
-                <span id="auth-toggle-msg">New User?</span> 
-                <span onclick="toggleMode()" id="auth-toggle-btn">Create an Account</span>
-            </div>
+            <i class="fas fa-plane-departure" style="font-size: 40px; color: var(--primary); margin-bottom: 15px;"></i>
+            <h2>MyTravel Agency</h2>
+            <p style="margin-bottom: 20px; color: #666;">Login to access exclusive deals</p>
+            <input type="email" class="auth-input" placeholder="Email">
+            <input type="password" class="auth-input" placeholder="Password">
+            <button class="auth-btn" onclick="startApp()">Login</button>
         </div>
     </div>
 
-    <div id="main-website">
-        
+    <div id="main-site">
         <nav class="navbar">
-            <div class="nav-brand"><i class="fas fa-compass"></i> MyTravel <span>Agency</span></div>
+            <a href="#" class="logo"><i class="fas fa-globe-asia"></i> MyTravel<span>Agency</span></a>
             <div class="nav-links">
-                <a href="#tours">Destinations</a>
-                <button class="btn-logout" onclick="logoutApp()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                <a href="#tours">Packages</a>
+                <a href="#payment">Payment</a>
+                <a href="#location">Location</a>
             </div>
         </nav>
 
-        <header class="hero">
-            <h1>Discover Your Next Adventure</h1>
-            <p>Experience the best travel packages, weekend getaways, and unforgettable memories.</p>
-            <a href="#tours" style="background: var(--primary); color: white; padding: 15px 35px; border-radius: 30px; font-weight: bold; margin-top: 20px; font-size: 16px; text-decoration: none; transition: 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Explore Packages</a>
-        </header>
-
-        <section id="tours" class="section-padding">
-            <div class="section-header">
-                <p class="section-subtitle">Top Destinations</p>
-                <h2 class="section-title">Premium Tour Packages</h2>
-            </div>
-            
+        <section id="tours" class="section">
+            <h2 class="section-title">Best Tour Packages</h2>
             <div class="grid">
                 <div class="card">
-                    <div class="card-img-wrapper">
-                        <span class="badge"><i class="far fa-clock"></i> 4D / 3N</span>
-                        <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Kedarnath" class="card-img">
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=500" class="card-img">
                     <div class="card-body">
                         <h3>Kedarnath Yatra</h3>
-                        <ul class="card-features">
-                            <li><i class="fas fa-check-circle"></i> Luxury Hotel Stay</li>
-                            <li><i class="fas fa-check-circle"></i> Meals Included</li>
-                            <li><i class="fas fa-check-circle"></i> VIP Darshan Assist</li>
-                        </ul>
-                        <div class="price-box">
-                            <span class="price">₹9,999</span>
-                            <a href="https://wa.me/910000000000?text=I want to book Kedarnath Yatra" class="btn-wa"><i class="fab fa-whatsapp" style="font-size: 20px;"></i> Book</a>
-                        </div>
+                        <p>4 Days / 3 Nights - Full Guide & VIP Pass</p>
+                        <div class="price">₹9,999/-</div>
+                        <a href="https://wa.me/910000000000?text=I want to book Kedarnath" class="wa-btn"><i class="fab fa-whatsapp"></i> Book Now</a>
                     </div>
                 </div>
-
                 <div class="card">
-                    <div class="card-img-wrapper">
-                        <span class="badge"><i class="far fa-clock"></i> 3D / 2N</span>
-                        <img src="https://images.unsplash.com/photo-1605649487212-473317c4c7ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Manali" class="card-img">
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1605649487212-473317c4c7ea?w=500" class="card-img">
                     <div class="card-body">
-                        <h3>Manali Weekend</h3>
-                        <ul class="card-features">
-                            <li><i class="fas fa-check-circle"></i> Mountain View Resort</li>
-                            <li><i class="fas fa-check-circle"></i> Local Sightseeing</li>
-                            <li><i class="fas fa-check-circle"></i> Snow Activities</li>
-                        </ul>
-                        <div class="price-box">
-                            <span class="price">₹5,499</span>
-                            <a href="https://wa.me/910000000000?text=I want to book Manali Trip" class="btn-wa"><i class="fab fa-whatsapp" style="font-size: 20px;"></i> Book</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-img-wrapper">
-                        <span class="badge"><i class="far fa-clock"></i> 5D / 4N</span>
-                        <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Goa" class="card-img">
-                    </div>
-                    <div class="card-body">
-                        <h3>Goa Beach Holiday</h3>
-                        <ul class="card-features">
-                            <li><i class="fas fa-check-circle"></i> Beachfront Resort</li>
-                            <li><i class="fas fa-check-circle"></i> Water Sports</li>
-                            <li><i class="fas fa-check-circle"></i> Airport Pick/Drop</li>
-                        </ul>
-                        <div class="price-box">
-                            <span class="price">₹12,999</span>
-                            <a href="https://wa.me/910000000000?text=I want to book Goa Holiday" class="btn-wa"><i class="fab fa-whatsapp" style="font-size: 20px;"></i> Book</a>
-                        </div>
+                        <h3>Manali Trip</h3>
+                        <p>3 Days / 2 Nights - Snow & Sightseeing</p>
+                        <div class="price">₹5,499/-</div>
+                        <a href="https://wa.me/910000000000?text=I want to book Manali" class="wa-btn"><i class="fab fa-whatsapp"></i> Book Now</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <footer>
-            <div class="social-links">
-                <a href="https://wa.me/910000000000"><i class="fab fa-whatsapp"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
+        <section id="payment" class="section" style="background: #e9ecef;">
+            <h2 class="section-title">Payment Information</h2>
+            <div class="info-container">
+                <div class="info-box">
+                    <i class="fas fa-university" style="font-size: 30px; color: var(--primary);"></i>
+                    <h3 style="margin: 15px 0;">Bank Transfer & UPI</h3>
+                    <p>UPI ID: <strong>yourname@upi</strong></p>
+                    <p>Google Pay / PhonePe: <strong>91XXXXXXXXXX</strong></p>
+                    <p style="margin-top: 10px; font-size: 14px; color: #666;">Note: Please send payment screenshot on WhatsApp for confirmation.</p>
+                </div>
             </div>
-            <p>&copy; 2026 MyTravel Agency. All Rights Reserved.</p>
+        </section>
+
+        <section id="location" class="section">
+            <h2 class="section-title">Our Office Location</h2>
+            <div class="info-container">
+                <div class="info-box">
+                    <i class="fas fa-map-marker-alt" style="font-size: 30px; color: #ff4757;"></i>
+                    <h3>Visit Us</h3>
+                    <p>Sector 15, Near Main Market, New Delhi, India</p>
+                    <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501.0!2d77.0!3d28.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDAwJzAwLjAiTiA3N8KwMDAnMDAuMCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 MyTravel Agency | Designed for Excellence</p>
         </footer>
     </div>
 
     <script>
-        // 1. Preloader Logic
-        function hidePreloader() {
-            setTimeout(() => {
-                document.getElementById('preloader').style.opacity = '0';
-                setTimeout(() => { document.getElementById('preloader').style.display = 'none'; }, 500);
-            }, 1000); 
+        function startApp() {
+            document.getElementById('auth-section').style.display = 'none';
+            document.getElementById('main-site').style.display = 'block';
+            window.scrollTo(0,0);
         }
-
-        // 2. Toast Notification
-        function showToast(message, isError = false) {
-            const toast = document.getElementById("toast");
-            toast.style.background = isError ? "#ef4444" : "#10b981"; 
-            toast.innerHTML = isError ? `<i class="fas fa-exclamation-circle"></i> ${message}` : `<i class="fas fa-check-circle"></i> ${message}`;
-            toast.style.right = "20px"; 
-            setTimeout(() => { toast.style.right = "-350px"; }, 3000); 
-        }
-
-        // 3. Auth Toggle
-        let isLogin = true;
-        function toggleMode() {
-            isLogin = !isLogin;
-            document.getElementById('auth-title').innerText = isLogin ? "Welcome Back" : "Create Account";
-            document.getElementById('auth-subtitle').innerText = isLogin ? "Login to access premium travel deals" : "Join us for best travel deals";
-            document.getElementById('name-box').style.display = isLogin ? "none" : "block";
-            document.getElementById('auth-submit').innerHTML = isLogin ? 'Login Securely <i class="fas fa-shield-alt"></i>' : 'Sign Up Now <i class="fas fa-user-plus"></i>';
-            document.getElementById('auth-toggle-msg').innerText = isLogin ? "New User?" : "Already Registered?";
-            document.getElementById('auth-toggle-btn').innerText = isLogin ? "Create an Account" : "Login Securely";
-        }
-
-        // 4. Login Process
-        function processAuth() {
-            const email = document.getElementById('user-email').value;
-            const pass = document.getElementById('user-pass').value;
-
-            if(!email || !pass) { showToast("Email aur Password zaruri hai!", true); return; }
-
-            showToast(isLogin ? "Login Successful! Loading Dashboard..." : "Account Created Successfully!");
-            
-            setTimeout(() => {
-                const authSection = document.getElementById('auth-section');
-                const mainWebsite = document.getElementById('main-website');
-                
-                authSection.style.transition = "0.5s";
-                authSection.style.opacity = "0";
-                
-                setTimeout(() => {
-                    authSection.style.display = 'none';
-                    mainWebsite.style.display = 'block';
-                    window.scrollTo(0, 0);
-                    setTimeout(() => {
-                        mainWebsite.style.transition = "0.8s";
-                        mainWebsite.style.opacity = "1";
-                    }, 100);
-                }, 500);
-            }, 1000);
-        }
-
-        // 5. Logout
-        function logoutApp() {
-            document.getElementById('user-email').value = "";
-            document.getElementById('user-pass').value = "";
-          
+    </script>
+</body>
+</html>
