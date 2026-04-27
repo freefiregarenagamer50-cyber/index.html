@@ -74,51 +74,7 @@
         </section>
     </div>
 <script>
-        let isLoginPage = false;
-
-        function toggleForm() {
-            isLoginPage = !isLoginPage;
-            document.getElementById('form-title').innerText = isLoginPage ? "Login" : "create a new account ";
-            document.getElementById('signup-fields').classList.toggle('hidden', isLoginPage);
-            document.getElementById('auth-btn').innerText = isLoginPage ? "Login" : "Register";
-            document.getElementById('toggle-text').innerText = isLoginPage ? "i don't have any account? Signup " : "i have an account? Login";
-        }
-
-        function handleAuth() {
-            const email = document.getElementById('user-email').value;
-            const pass = document.getElementById('user-pass').value;
-            const name = document.getElementById('user-name').value;
-
-            if(!email || !pass) { alert("Sari details bhariye!"); return; }
-
-            if (!isLoginPage) {
-                // Signup Logic
-                localStorage.setItem('userEmail', email);
-                localStorage.setItem('userPass', pass);
-                localStorage.setItem('userName', name);
-                alert("Registration Successful!  login now.");
-                toggleForm();
-            } else {
-                // Login Logic
-                const storedEmail = localStorage.getItem('userEmail');
-                const storedPass = localStorage.getItem('userPass');
-
-                if (email === storedEmail && pass === storedPass) {
-                    showWebsite();
-                } else {
-                    alert("wrong Email or Password!");
-                }
-            }
-        }
-
-        function showWebsite() {
-            document.getElementById('auth-box').style.display = 'none';
-            document.getElementById('main-site').style.display = 'block';
-            document.getElementById('display-name').innerText = localStorage.getItem('userName') || "Yatri";
-        }
-
-        function logout() {
-            location.reload(); // Simple reload to reset state
+         location.reload(); // Simple reload to reset state
         }
     </script>
 </body>
