@@ -6,6 +6,10 @@
     <title>MyTravel Agency - Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
     <style>
         :root { --primary: #0984e3; --dark: #2d3436; --light: #f1f2f6; --success: #25D366; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -15,8 +19,10 @@
         #auth-section { height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1350&q=80') center/cover; }
         .auth-card { background: white; padding: 40px; border-radius: 20px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
         .auth-input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
-        .auth-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
-
+        .auth-btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s;}
+        .auth-btn:hover { background: #0773c5; }
+        .toggle-link { margin-top: 15px; display: inline-block; color: var(--primary); font-weight: 600; cursor: pointer; font-size: 14px;}
+        
         /* Main Site */
         #main-site { display: none; }
         .navbar { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
@@ -50,10 +56,14 @@
         <div class="auth-card">
             <i class="fas fa-plane-departure" style="font-size: 40px; color: var(--primary); margin-bottom: 15px;"></i>
             <h2>MyTravel Agency</h2>
-            <p style="margin-bottom: 20px; color: #666;">Login to access exclusive deals</p>
-            <input type="email" class="auth-input" placeholder="Email">
-            <input type="password" class="auth-input" placeholder="Password">
-            <button class="auth-btn" onclick="startApp()">Login</button>
+            <p id="auth-subtitle" style="margin-bottom: 20px; color: #666;">Login to access exclusive deals</p>
+            
+            <input type="email" id="email" class="auth-input" placeholder="Email Address" required>
+            <input type="password" id="password" class="auth-input" placeholder="Password (Min 6 chars)" required>
+            
+            <button class="auth-btn" id="auth-btn" onclick="handleAuth()">Login</button>
+            <br>
+            <span class="toggle-link" onclick="toggleAuthMode()" id="toggle-text">create a new account ? Sign Up </span>
         </div>
     </div>
 
@@ -63,7 +73,7 @@
             <div class="nav-links">
                 <a href="#tours">Packages</a>
                 <a href="#payment">Payment</a>
-                <a href="#location">Location</a>
+                <a href="#" onclick="logoutApp()" style="color: #ff4757;">Logout</a>
             </div>
         </nav>
 
@@ -98,7 +108,7 @@
                     <i class="fas fa-university" style="font-size: 30px; color: var(--primary);"></i>
                     <h3 style="margin: 15px 0;">Bank Transfer & UPI</h3>
                     <p>UPI ID: <strong>yourname@upi</strong></p>
-                    <p>Google Pay / PhonePe: <strong>91XXXXXXXXXX</strong></p>
+                    <p>Google Pay / PhonePe: <strong>918539987075</strong></p>
                     <p style="margin-top: 10px; font-size: 14px; color: #666;">Note: Please send payment screenshot on WhatsApp for confirmation.</p>
                 </div>
             </div>
@@ -117,15 +127,77 @@
         </section>
 
         <footer>
-            <p>&copy; 2026 MyTravel Agency | Designed for Excellence</p>
+            <p>© 2026 MyTravel Agency | Designed for Excellence</p>
         </footer>
     </div>
 
     <script>
-        function startApp() {
-            document.getElementById('auth-section').style.display = 'none';
-            document.getElementById('main-site').style.display = 'block';
-            window.scrollTo(0,0);
+        // enter your firebase key
+        const firebaseConfig = {
+            apiKey: "AIzaSyAdPYmsQMoXyBQ_VxPjeKxBsQF9vRaxo50",
+            authDomain: "my-travel-trip.firebaseapp.com",
+            projectId: "my-travel-trip",
+            storageBucket: "my-travel-trip.firebasestorage.app",
+            messagingSenderId: "318651706382",
+            appId: "1:318651706382"
+        };
+        
+        // start now
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Login / Register Switcher
+        let isLoginMode = true;
+        function toggleAuthMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('auth-btn').innerText = isLoginMode ? "Login" : "Sign Up";
+            document.getElementById('auth-subtitle').innerText = isLoginMode ? "Login to access exclusive deals" : "create new account";
+            document.getElementById('toggle-text').innerText = isLoginMode ? "create a new account ? Sign Up " : "i have already an account? Login ";
+        }
+
+        // Asli Authentication Logic
+        function handleAuth() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if(!email || !password) {
+                alert("please enter your email and password !");
+                return;
+            }
+
+            if(isLoginMode) {
+                // Login Data
+                auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    document.getElementById('auth-section').style.display = 'none';
+                    document.getElementById('main-site').style.display = 'block';
+                    window.scrollTo(0,0);
+                })
+                .catch((error) => {
+                    alert("wrong: " + error.message);
+                });
+            } else {
+                // Register 
+                auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    alert("your account is created now login .");
+                    toggleAuthMode(); // return on login page
+                    document.getElementById('password').value = '';
+                })
+                .catch((error) => {
+                    alert("wrong: " + error.message);
+                });
+            }
+        }
+
+        // Logout 
+        function logoutApp() {
+            auth.signOut().then(() => {
+                document.getElementById('main-site').style.display = 'none';
+                document.getElementById('auth-section').style.display = 'flex';
+                document.getElementById('email').value = '';
+                document.getElementById('password').value = '';
+            });
         }
     </script>
 </body>
