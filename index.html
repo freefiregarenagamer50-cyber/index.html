@@ -135,12 +135,12 @@
         // SMART PACKAGES LIST (choice the best package )
         // ==========================================
         const travelPackages = [
-            { name: "Bodh Gaya Darshan", type: "Bihar", desc: "Mahabodhi Temple & Gaya Ji", price: "9,999", img: "https://images.unsplash.com/photo-1622340579679-0639f75960c1?w=600" },
-            { name: "Rajgir & Nalanda", type: "Bihar", desc: "Glass Bridge & Ancient University", price: "3,999", img: "https://images.unsplash.com/photo-1616781296062-81e01863584f?w=600" },
-            { name: "Patna City Tour", type: "Bihar", desc: "Marine Drive, Golghar & Museum", price: "2,499", img: "https://images.unsplash.com/photo-1622144415781-b7bc603c4f74?w=600" },
-            { name: "Vaishali Heritage", type: "Bihar", desc: "Ashoka Pillar & Peace Pagoda", price: "5,499", img: "https://images.unsplash.com/photo-1590050752118-2e0e5a6fc5e9?w=600" },
-            { name: "Sasaram Tomb", type: "Bihar", desc: "Sher Shah Suri Tomb Darshan", price: "2,999", img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=600" },
-            { name: "Valmiki Nagar", type: "Bihar", desc: "Tiger Reserve & Jungle Safari", price: "5,999", img: "https://images.unsplash.com/photo-1550236520-7050fce12d33?w=600" },
+            { name: "Bodh Gaya Darshan", type: "Bihar", desc: "Mahabodhi Temple & Gaya Ji", price: "10,999", img: "https://images.unsplash.com/photo-1622340579679-0639f75960c1?w=600" },
+            { name: "Rajgir & Nalanda", type: "Bihar", desc: "Glass Bridge & Ancient University", price: "5,999", img: "https://images.unsplash.com/photo-1616781296062-81e01863584f?w=600" },
+            { name: "Patna City Tour", type: "Bihar", desc: "Marine Drive, Golghar & Museum", price: "12,499", img: "https://images.unsplash.com/photo-1622144415781-b7bc603c4f74?w=600" },
+            { name: "Vaishali Heritage", type: "Bihar", desc: "Ashoka Pillar & Peace Pagoda", price: "99,499", img: "https://images.unsplash.com/photo-1590050752118-2e0e5a6fc5e9?w=600" },
+            { name: "Sasaram Tomb", type: "Bihar", desc: "Sher Shah Suri Tomb Darshan", price: "22,999", img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=600" },
+            { name: "Valmiki Nagar", type: "Bihar", desc: "Tiger Reserve & Jungle Safari", price: "12,999", img: "https://images.unsplash.com/photo-1550236520-7050fce12d33?w=600" },
             { name: "Darbhanga Palace", type: "Bihar", desc: "Royal Palace & Mithila Art", price: "3,299", img: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600" },
             { name: "Kedarnath Yatra", type: "Uttarakhand", desc: "VIP Darshan & Helicopter Option", price: "9,999", img: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600" },
             { name: "Manali Snow Trip", type: "Himachal", desc: "Rohtang Pass & Solang Valley", price: "6,499", img: "https://images.unsplash.com/photo-1605649487212-473317c4c7ea?w=600" },
@@ -148,14 +148,14 @@
             { name: "Kashmir Paradise", type: "J&K", desc: "Srinagar Shikara & Gulmarg", price: "14,500", img: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=600" },
             { name: "Kerala Backwaters", type: "Kerala", desc: "Houseboat & Munnar Tea Gardens", price: "12,999", img: "https://images.unsplash.com/photo-1602216056096-3b40cc0e9944?w=600" },
             { name: "Jaipur Royals", type: "Rajasthan", desc: "Hawa Mahal, Forts & Desert", price: "7,499", img: "https://images.unsplash.com/photo-1477587458883-47145ed94245?w=600" },
-            { name: "Darjeeling Tea", type: "West Bengal", desc: "Tiger Hill & Toy Train", price: "8,999", img: "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=600" },
+            { name: "Darjeeling Tea", type: "West Bengal", desc: "Tiger Hill & Toy Train", price: "98,999", img: "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=600" },
             { name: "Sikkim Beauty", type: "Sikkim", desc: "Gangtok & Nathula Pass", price: "10,999", img: "https://images.unsplash.com/photo-1588716503951-e737e17db02b?w=600" },
-            { name: "Andaman Islands", type: "Andaman", desc: "Scuba Diving & Radhanagar Beach", price: "22,000", img: "https://images.unsplash.com/photo-1589394815804-964ce0ff96c7?w=600" },
+            { name: "Andaman Islands", type: "Andaman", desc: "Scuba Diving & Radhanagar Beach", price: "62,000", img: "https://images.unsplash.com/photo-1589394815804-964ce0ff96c7?w=600" },
             { name: "Varanasi Ganga", type: "UP", desc: "Kashi Vishwanath & Ganga Aarti", price: "4,999", img: "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=600" },
             { name: "Agra Taj Mahal", type: "UP", desc: "Taj Mahal & Agra Fort", price: "3,999", img: "https://images.unsplash.com/photo-1564507592208-028bb411624c?w=600" },
             { name: "Shimla Weekend", type: "Himachal", desc: "Mall Road & Kufri", price: "5,999", img: "https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=600" },
-            { name: "Ladakh Bike Trip", type: "Ladakh", desc: "Pangong Lake & Khardung La", price: "18,999", img: "https://images.unsplash.com/photo-1580100586938-02822d99c4a8?w=600" },
-            { name: "Ooty Hills", type: "Tamil Nadu", desc: "Botanical Garden & Lakes", price: "9,499", img: "https://images.unsplash.com/photo-1585135402636-f0896942ceb3?w=600" }
+            { name: "Ladakh Bike Trip", type: "Ladakh", desc: "Pangong Lake & Khardung La", price: "19,999", img: "https://images.unsplash.com/photo-1580100586938-02822d99c4a8?w=600" },
+            { name: "Ooty Hills", type: "Tamil Nadu", desc: "Botanical Garden & Lakes", price: "99,999", img: "https://images.unsplash.com/photo-1585135402636-f0896942ceb3?w=600" }
         ];
 
         const container = document.getElementById('packages-container');
@@ -170,7 +170,7 @@
                         <h3 style="margin-top: 10px;">${pkg.name}</h3>
                         <p style="color:#666; font-size:14px; margin-bottom:15px;">${pkg.desc}</p>
                         <div class="price">₹${pkg.price}/-</div>
-                        <a href="https://wa.me/910000000000?text=Hello, I want to book the ${pkg.name} package" class="wa-btn">
+                        <a href="https://wa.me/+91 8539987075?text=Hello, I want to book the ${pkg.name} package" class="wa-btn">
                             <i class="fab fa-whatsapp"></i> Book Now
                         </a>
                     </div>
