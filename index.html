@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyTravel Agency - Best Tour Packages</title>
     
-    <meta name="tourist ajency" content="Best Tour Packages for Bihar, Kedarnath, Manali, and Goa. Book your next adventure with us.">
+    <meta name="description" content="Best Tour Packages for Bihar, Kedarnath, Manali, and Goa. Book your next adventure with us.">
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/814/814513.png">
     
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -74,7 +74,7 @@
             </div>
 
             <div style="text-align: right; margin-top: -5px; margin-bottom: 15px;">
-                <span onclick="forgotPassword()" id="forgot-pass-link" style="color: var(--primary); font-size: 13px; font-weight: 600; cursor: pointer;">forget password?</span>
+                <span onclick="forgotPassword()" id="forgot-pass-link" style="color: var(--primary); font-size: 13px; font-weight: 600; cursor: pointer;">forgot password?</span>
             </div>
             
             <button class="auth-btn" id="auth-btn" onclick="handleAuth()">Login</button>
@@ -99,7 +99,7 @@
 
         <section class="section">
             <h2 class="section-title">Our Mega Packages List</h2>
-            <p style="color:#666;">Choice your favourite place </p>
+            <p style="color:#666;">choice your favourite place </p>
             
             <div class="grid" id="packages-container"></div>
         </section>
@@ -110,8 +110,8 @@
                 <div class="info-box">
                     <i class="fas fa-qr-code" style="font-size: 30px; color: var(--primary);"></i>
                     <h3 style="margin: 15px 0;">Secure Payment</h3>
-                    <p>UPI ID: <strong>ganeshnaromurar@oksbi</strong></p>
-                    <p>PhonePe/GPay: <strong>+91 8539987075(name-ajay kumar)</strong></p>
+                    <p>UPI ID: <strong></strong></p>
+                    <p>PhonePe/GPay: <strong>+91 8539987075</strong></p>
                 </div>
                 <div class="info-box">
                     <i class="fas fa-map-pin" style="font-size: 30px; color: #ff4757;"></i>
@@ -122,7 +122,7 @@
         </section>
 
         <footer>
-            <p> 2026 MyTravel Agency | All Rights Reserved</p>
+            <p>© 2026 MyTravel Agency | All Rights Reserved</p>
         </footer>
 
         <a href="https://wa.me/910000000000" target="_blank" style="position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 9999; text-decoration: none;">
@@ -132,7 +132,7 @@
 
     <script>
         // ==========================================
-        // SMART PACKAGES LIST (add a new package list)
+        // SMART PACKAGES LIST (choice the best package )
         // ==========================================
         const travelPackages = [
             { name: "Bodh Gaya Darshan", type: "Bihar", desc: "Mahabodhi Temple & Gaya Ji", price: "4,499", img: "https://images.unsplash.com/photo-1622340579679-0639f75960c1?w=600" },
@@ -170,7 +170,7 @@
                         <h3 style="margin-top: 10px;">${pkg.name}</h3>
                         <p style="color:#666; font-size:14px; margin-bottom:15px;">${pkg.desc}</p>
                         <div class="price">₹${pkg.price}/-</div>
-                        <a href="https://wa.me/+91 8539987075?text=Hello, I want to book the ${pkg.name} package" class="wa-btn">
+                        <a href="https://wa.me/910000000000?text=Hello, I want to book the ${pkg.name} package" class="wa-btn">
                             <i class="fab fa-whatsapp"></i> Book Now
                         </a>
                     </div>
@@ -180,14 +180,14 @@
         container.innerHTML = htmlContent;
 
         // ==========================================
-        // FIREBASE AUTHENTICATION ()
+        // FIREBASE AUTHENTICATION (Apni keys daalein)
         // ==========================================
         const firebaseConfig = {
             apiKey: "AIzaSyAdPYmsQMoXyBQ_VxPjeKxBsQF9vRaxo50",
             authDomain: "my-travel-trip.firebaseapp.com",
             projectId: "my-travel-trip",
             storageBucket: "my-travel-trip.firebasestorage.app",
-            appId: "318651706382"
+            appId: "1:318651706382"
         };
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
@@ -201,8 +201,8 @@
 
         function forgotPassword() {
             const email = document.getElementById('email').value;
-            if(!email) { alert("reset your password first enter your email "); return; }
-            auth.sendPasswordResetEmail(email).then(() => alert("Password reset link has sent in your gmail !")).catch(e => alert(e.message));
+            if(!email) { alert("enter your email !"); return; }
+            auth.sendPasswordResetEmail(email).then(() => alert("Password reset link send your email !")).catch(e => alert(e.message));
         }
 
         let isLogin = true;
@@ -217,16 +217,16 @@
         function handleAuth() {
             const email = document.getElementById('email').value;
             const pass = document.getElementById('password').value;
-            if(!email || !pass) { alert("Details daalein!"); return; }
+            if(!email || !pass) { alert("fill your details!"); return; }
 
             if(isLogin) {
                 auth.signInWithEmailAndPassword(email, pass)
                 .then(() => { document.getElementById('auth-section').style.display='none'; document.getElementById('main-site').style.display='block'; window.scrollTo(0,0); })
-                .catch((e) => alert("wrong email and password));
+                .catch((e) => alert("wrong email or password: " + e.message));
             } else {
                 auth.createUserWithEmailAndPassword(email, pass)
-                .then(() => { alert("account has created!login now."); toggleAuthMode(); document.getElementById('password').value=''; })
-                .catch((e) => alert("wrong password or email: " ));
+                .then(() => { alert("Account create successfully!login now."); toggleAuthMode(); document.getElementById('password').value=''; })
+                .catch((e) => alert("wrong email or password: " + e.message));
             }
         }
 
@@ -234,5 +234,14 @@
             auth.signOut().then(() => { location.reload(); });
         }
     </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+</head>
+<body>
+    
 </body>
 </html>
