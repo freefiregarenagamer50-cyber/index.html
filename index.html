@@ -125,7 +125,7 @@
             <p>© 2026 MyTravel Agency | All Rights Reserved</p>
         </footer>
 
-        <a href="https://wa.me/+91 8539987075" target="_blank" style="position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 9999; text-decoration: none;">
+        <a href="https://wa.me/" target="_blank" style="position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 35px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 9999; text-decoration: none;">
             <i class="fab fa-whatsapp">+918539987075</i>
         </a>
     </div>
@@ -136,15 +136,15 @@
         // ==========================================
         const travelPackages = [
             { name: "Bodh Gaya Darshan", type: "Bihar", desc: "Mahabodhi Temple & Gaya Ji", price: "10,999", img: "https://images.unsplash.com/photo-1622340579679-0639f75960c1?w=600" },
-            { name: "Rajgir & Nalanda", type: "Bihar", desc: "Glass Bridge & Ancient University", price: "51,999", img: "https://images.unsplash.com/photo-1616781296062-81e01863584f?w=600" },
+            { name: "Rajgir & Nalanda", type: "Bihar", desc: "Glass Bridge & Ancient University", price: "11,999", img: "https://images.unsplash.com/photo-1616781296062-81e01863584f?w=600" },
             { name: "Patna City Tour", type: "Bihar", desc: "Marine Drive, Golghar & Museum", price: "12,499", img: "https://images.unsplash.com/photo-1622144415781-b7bc603c4f74?w=600" },
-            { name: "Vaishali Heritage", type: "Bihar", desc: "Ashoka Pillar & Peace Pagoda", price: "99,499", img: "https://images.unsplash.com/photo-1590050752118-2e0e5a6fc5e9?w=600" },
-            { name: "Sasaram Tomb", type: "Bihar", desc: "Sher Shah Suri Tomb Darshan", price: "22,999", img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=600" },
+            { name: "Vaishali Heritage", type: "Bihar", desc: "Ashoka Pillar & Peace Pagoda", price: "9,499", img: "https://images.unsplash.com/photo-1590050752118-2e0e5a6fc5e9?w=600" },
+            { name: "Sasaram Tomb", type: "Bihar", desc: "Sher Shah Suri Tomb Darshan", price: "12,999", img: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=600" },
             { name: "Valmiki Nagar", type: "Bihar", desc: "Tiger Reserve & Jungle Safari", price: "12,999", img: "https://images.unsplash.com/photo-1550236520-7050fce12d33?w=600" },
-            { name: "Darbhanga Palace", type: "Bihar", desc: "Royal Palace & Mithila Art", price: "3,299", img: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600" },
-            { name: "Kedarnath Yatra", type: "Uttarakhand", desc: "VIP Darshan & Helicopter Option", price: "9,999", img: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600" },
-            { name: "Manali Snow Trip", type: "Himachal", desc: "Rohtang Pass & Solang Valley", price: "6,499", img: "https://images.unsplash.com/photo-1605649487212-473317c4c7ea?w=600" },
-            { name: "Goa Beach Party", type: "Goa", desc: "Baga Beach, Cruises & Clubs", price: "11,999", img: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600" },
+            { name: "Darbhanga Palace", type: "Bihar", desc: "Royal Palace & Mithila Art", price: "13,299", img: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600" },
+            { name: "Kedarnath Yatra", type: "Uttarakhand", desc: "VIP Darshan & Helicopter Option", price: "19,999", img: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600" },
+            { name: "Manali Snow Trip", type: "Himachal", desc: "Rohtang Pass & Solang Valley", price: "16,499", img: "https://images.unsplash.com/photo-1605649487212-473317c4c7ea?w=600" },
+            { name: "Goa Beach Party", type: "Goa", desc: "Baga Beach, Cruises & Clubs", price: "19,999", img: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=600" },
             { name: "Kashmir Paradise", type: "J&K", desc: "Srinagar Shikara & Gulmarg", price: "14,500", img: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?w=600" },
             { name: "Kerala Backwaters", type: "Kerala", desc: "Houseboat & Munnar Tea Gardens", price: "12,999", img: "https://images.unsplash.com/photo-1602216056096-3b40cc0e9944?w=600" },
             { name: "Jaipur Royals", type: "Rajasthan", desc: "Hawa Mahal, Forts & Desert", price: "7,499", img: "https://images.unsplash.com/photo-1477587458883-47145ed94245?w=600" },
@@ -170,7 +170,7 @@
                         <h3 style="margin-top: 10px;">${pkg.name}</h3>
                         <p style="color:#666; font-size:14px; margin-bottom:15px;">${pkg.desc}</p>
                         <div class="price">₹${pkg.price}/-</div>
-                        <a href="https://wa.me/+91 8539987075?text=Hello, I want to book the ${pkg.name} package" class="wa-btn">
+                        <a href="https://wa.me/?text=Hello, I want to book the ${pkg.name} package" class="wa-btn">
                             <i class="fab fa-whatsapp">+918539987075</i> Book Now
                         </a>
                     </div>
